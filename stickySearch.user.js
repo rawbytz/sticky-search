@@ -10,8 +10,6 @@
 
 // ==/UserScript==
 
-// [] add modified clicks??
-
 (function () {
   'use strict';
   function getSearchParam() {
@@ -25,7 +23,7 @@
     if (nav) location.href = nav.getUrl() + getSearchParam();
   }
 
-  function setLocationKeepSearch(item, zoomOut) { // zoomOut Boolean
+  function zoomKeepSearch(item, zoomOut) { // zoomOut Boolean
     const target = zoomOut ? item.getParent() : item;
     if (!target) return
     const baseUrl = target.isMainDocumentRoot() ? "/#" : target.getUrl(); //need to add # on home to avoid reload
@@ -37,12 +35,12 @@
     if (event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey) {
       switch (event.key) {
         case "ArrowDown": // Ctrl+Alt+Down = zoom in keep search
-          setLocationKeepSearch(WF.focusedItem());
+          zoomKeepSearch(WF.focusedItem());
           event.stopPropagation();
           event.preventDefault();
           break;
         case "ArrowUp": // Ctrl+Alt+Up = zoom out keep search
-          setLocationKeepSearch(WF.currentItem(), true);
+          zoomKeepSearch(WF.currentItem(), true);
           event.stopPropagation();
           event.preventDefault();
           break;
