@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Sticky Search for WorkFlowy
 // @namespace    https://rawbytz.wordpress.com
-// @version      0.2
+// @version      0.3
 // @description  Navigate WorkFlowy and keep search active
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -25,12 +25,12 @@
     if (nav) location.href = nav.getUrl() + getSearchParam();
   }
 
-  function setLocationKeepSearch(item) { // zoomIn Boolean
-    if (!item) return
-    const baseUrl = item.isMainDocumentRoot() ? "/#" : item.getUrl(); //need to add # on home to avoid reload
+  function setLocationKeepSearch(item, zoomOut) { // zoomOut Boolean
+    const target = zoomOut ? item.getParent() : item;
+    if (!target) return
+    const baseUrl = target.isMainDocumentRoot() ? "/#" : target.getUrl(); //need to add # on home to avoid reload
     location.href = baseUrl + getSearchParam();
-    // [] Fix focus on zoomOut, probably need to modify function inputs with boolean for zoomOut (or In) 
-    WF.editItemName(item.isMainDocumentRoot() ? item.getVisibleChildren()[0] : item);
+    WF.editItemName(item); // set focus
   }
 
   document.addEventListener("keydown", function (event) {
@@ -42,7 +42,7 @@
           event.preventDefault();
           break;
         case "ArrowUp": // Ctrl+Alt+Up = zoom out keep search
-          setLocationKeepSearch(WF.currentItem().getParent());
+          setLocationKeepSearch(WF.currentItem(), true);
           event.stopPropagation();
           event.preventDefault();
           break;
