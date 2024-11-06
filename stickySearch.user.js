@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Sticky Search for WorkFlowy
 // @namespace    https://rawbytz.wordpress.com
-// @version      1.0
+// @version      2024-11-06
 // @description  Navigate WorkFlowy and keep search active
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -9,6 +9,8 @@
 // @grant        none
 
 // ==/UserScript==
+
+// https://github.com/rawbytz/sticky-search
 
 (function () {
   'use strict';
