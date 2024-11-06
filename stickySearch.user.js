@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Sticky Search for WorkFlowy
 // @namespace    https://rawbytz.wordpress.com
-// @version      0.1
+// @version      0.2
 // @description  Navigate WorkFlowy and keep search active
 // @author       rawbytz
 // @match        https://workflowy.com/*
@@ -19,18 +19,16 @@
     return search ? `?q=${encodeURIComponent(search)}` : ""
   }
 
-  // [] add end of sibs banner??
   function navSibKeepSearch(prev) {
     const c = WF.currentItem();
     const nav = prev ? c.getPreviousVisibleSibling(true) : c.getNextVisibleSibling(true);
     if (nav) location.href = nav.getUrl() + getSearchParam();
   }
 
-  const getBaseUrl = item => item.isMainDocumentRoot() ? "/#" : item.getUrl(); //need to add # to avoid reload
-
   function setLocationKeepSearch(item) {
     if (!item) return
-    location.href = getBaseUrl(item) + getSearchParam();
+    const baseUrl = item.isMainDocumentRoot() ? "/#" : item.getUrl(); //need to add # on home to avoid reload
+    location.href = baseUrl + getSearchParam();
     // [] Fix focus on zoomOut
     WF.editItemName(item.isMainDocumentRoot() ? item.getVisibleChildren()[0] : item);
   }
