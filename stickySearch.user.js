@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Sticky Search for WorkFlowy
 // @namespace    https://rawbytz.wordpress.com
-// @version      0.3
+// @version      1.0
 // @description  Navigate WorkFlowy and keep search active
 // @author       rawbytz
 // @match        https://workflowy.com/*
