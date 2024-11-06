@@ -25,11 +25,11 @@
     if (nav) location.href = nav.getUrl() + getSearchParam();
   }
 
-  function setLocationKeepSearch(item) {
+  function setLocationKeepSearch(item) { // zoomIn Boolean
     if (!item) return
     const baseUrl = item.isMainDocumentRoot() ? "/#" : item.getUrl(); //need to add # on home to avoid reload
     location.href = baseUrl + getSearchParam();
-    // [] Fix focus on zoomOut
+    // [] Fix focus on zoomOut, probably need to modify function inputs with boolean for zoomOut (or In) 
     WF.editItemName(item.isMainDocumentRoot() ? item.getVisibleChildren()[0] : item);
   }
 
